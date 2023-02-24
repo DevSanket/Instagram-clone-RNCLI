@@ -9,6 +9,8 @@ const post = {
   description:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti eos porro consequatur alias vel sapiente delectus doloribus eum dolores a ducimus quos magni, molestias eaque iusto nemo ut similique assumenda accusantium odio temporibus recusandae tenetur ullam! Quos accusantium optio aperiam.",
   user: {
+    id: "1",
+    name: "Test",
     image:
       "https://pbs.twimg.com/profile_images/1057881358826119168/J8Lp3eXh_400x400.jpg",
     username: "sanketsabale",
@@ -20,6 +22,8 @@ const post = {
       id: "1",
       comment: "Hello there",
       user: {
+        id: "1",
+        name: "Test",
         username: "vadimisnotjustdev",
       },
     },
@@ -28,6 +32,8 @@ const post = {
       comment:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, delectus.",
       user: {
+        id: "1",
+        name: "Test",
         username: "letsgoforcode",
       },
     },

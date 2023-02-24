@@ -6,8 +6,14 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Feather from "react-native-vector-icons/Feather";
 import styles from "./styles";
+import Comment from "./Comment/Comment";
+import { IComment, IPost } from "../Types/models";
 
-const FeedPost = ({ post }) => {
+interface IFeedPost {
+  post: IPost;
+}
+
+const FeedPost = ({ post }: IFeedPost) => {
   const [isLiked, setIsLiked] = React.useState<boolean>(false);
 
   return (
@@ -16,11 +22,11 @@ const FeedPost = ({ post }) => {
       <View style={styles.header}>
         <Image
           source={{
-            uri: "https://pbs.twimg.com/profile_images/1057881358826119168/J8Lp3eXh_400x400.jpg",
+            uri: post.user.image,
           }}
           style={styles.userAvatar}
         />
-        <Text style={styles.userName}>sanketsabale</Text>
+        <Text style={styles.userName}>{post.user.username}</Text>
         <Entypo
           name="dots-three-horizontal"
           size={16}
@@ -31,7 +37,7 @@ const FeedPost = ({ post }) => {
       {/* Content  */}
       <Image
         source={{
-          uri: "https://images.unsplash.com/reserve/bOvf94dPRxWu0u3QsPjF_tree.jpg",
+          uri: post.image,
         }}
         style={styles.image}
       />
@@ -66,34 +72,23 @@ const FeedPost = ({ post }) => {
         </View>
 
         <Text style={styles.text}>
-          Liked By <Text style={styles.bold}>lgrinevicius</Text> and{" "}
-          <Text style={styles.bold}>66 others</Text>
+          Liked By{" "}
+          <Text style={styles.bold}>{post.comments[0].user.username}</Text> and{" "}
+          <Text style={styles.bold}>{post.nofLikes} others</Text>
         </Text>
 
         {/* Post Description  */}
         <Text style={styles.text}>
-          <Text style={styles.bold}>sanketsabale</Text> Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Deleniti eos porro consequatur
-          alias vel sapiente delectus doloribus eum dolores a ducimus quos
-          magni, molestias eaque iusto nemo ut similique assumenda accusantium
-          odio temporibus recusandae tenetur ullam! Quos accusantium optio
-          aperiam.
+          <Text style={styles.bold}>{post.user.username}</Text>{" "}
+          {post.description}
         </Text>
 
         {/* Comments  */}
-        <Text>View all 16 Comments</Text>
-        <View style={styles.comments}>
-          <Text style={styles.commentText}>
-            <Text style={styles.bold}>vadimnotjustdev</Text> Lorem ipsum dolor
-            sit amet consectetur adipisicing elit. Aliquid, delectus.
-          </Text>
-          <AntDesign
-            name={"hearto"}
-            size={16}
-            style={styles.icon}
-            color={colors.black}
-          />
-        </View>
+        <Text>View all {post.nofComments} Comments</Text>
+        {post.comments &&
+          post.comments.map((comment: IComment) => (
+            <Comment comment={comment} key={comment.id} />
+          ))}
 
         {/* Posted Date  */}
         <Text>19 December, 2021</Text>
